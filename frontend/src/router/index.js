@@ -1,6 +1,6 @@
+import Home from '@/views/client/Home.vue'
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '@/views/Home.vue'
-import Index from '@/views/users/Index.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -9,13 +9,18 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: Home,
-      children: []
-    },
-    {
-      path: '/users',
-      name: 'users-index',
-      component: Index,
-    },
+    },{
+      path: '/admin',
+      name: 'layouts',
+      component: () => import('@/views/admin/layouts/Admin.vue'),
+      children: [
+      { 
+        path: 'users',
+        name: 'users-index',
+        component: () => import('@/views/admin/users/Index.vue')
+      }
+      ]
+    }
   ],
 })
 
