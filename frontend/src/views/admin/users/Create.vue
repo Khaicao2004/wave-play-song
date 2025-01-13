@@ -21,7 +21,16 @@ const newUser = ref({
 })
 // console.log(newUser.name);
     const submitForm = async () => {
-       await axios.post('http://127.0.0.1:8001/api/users', newUser)
+        try {
+            await axios.post('http://127.0.0.1:8000/api/users', newUser.value);
+            newUser.value.name = '';
+            newUser.value.email = '';
+            newUser.value.password = '';
+        } catch (error) {
+            console.log(error);
+            
+        }
+
         
     }
 </script>

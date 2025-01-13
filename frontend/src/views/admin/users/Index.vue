@@ -37,8 +37,13 @@ import { onMounted, ref } from 'vue';
     const users = ref([]);
 
     onMounted( async () => {
-        let response = await axios.get('http://127.0.0.1:8001/api/users');
-        users.value = response.data;
+        try {
+            let response = await axios.get('http://127.0.0.1:8000/api/users');
+            users.value = response.data;
+        } catch (error) {
+            console.log(error);
+        }
+        
     })
 </script>
 
