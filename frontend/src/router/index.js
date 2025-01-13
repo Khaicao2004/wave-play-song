@@ -18,7 +18,12 @@ const router = createRouter({
         path: 'users',
         name: 'users-index',
         component: () => import('@/views/admin/users/Index.vue')
-      }
+      },
+      { 
+        path: 'users/create',
+        name: 'users-create',
+        component: () => import('@/views/admin/users/Create.vue')
+      },
       ]
     }
   ],
