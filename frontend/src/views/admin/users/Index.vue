@@ -1,7 +1,11 @@
 <template>
     <RouterView />
     <h1 class="text-3xl font-bold text-center mt-5 mb-5">List users</h1>
+    
    <div class="p-4">
+    <div class="mb-5">
+        <RouterLink :to="{name: 'users-create'}" class="p-4 bg-blue-400">Create</RouterLink>
+    </div>
     <table class="border  w-full text-center">
         <thead>
             <tr>
@@ -26,6 +30,7 @@
 </template>
 
 <script setup>
+import { RouterLink } from 'vue-router';
 import axios from 'axios';
 import { onMounted, ref } from 'vue';
 
