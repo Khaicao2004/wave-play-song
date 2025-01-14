@@ -10,9 +10,7 @@ import { useRoute } from 'vue-router';
     const route = useRoute();
     const id = route.params.id;
     onMounted( async () => {
-        let response = await axios.get('http://127.0.0.1:8000/api/users/' + id);
-        console.log(response.data);
-        
+        let response = await axios.get('http://127.0.0.1:8000/api/users/' + id);        
     })
     
 </script>
