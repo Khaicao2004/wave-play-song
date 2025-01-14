@@ -14,6 +14,16 @@
             <label>Type: </label>
             <input type="text" v-model="user.type" class="border p-4">
         </div>
+        <div class="mt-3">
+            <label>Avatar: </label>
+            <input type="file" @change="uploadFile">
+        </div>
+        <div class="mt-3 mb-3">
+            <img :src="`http://127.0.0.1:8000/storage/${user.avatar}`" alt="" class="w-20 h-20">
+        </div>
+        <div class="mt-3 mb-3">
+            <img :src="image" alt="" class="w-20 h-20">
+        </div>
         <button type="submit" class="bg-green-500 p-4">Submit</button>
     </div>
     </form>
@@ -27,7 +37,7 @@ import { useRoute, useRouter } from 'vue-router';
     const route = useRoute();
     const id = route.params.id;
     const router = useRouter();
-
+    const image = ref(null);
     onMounted(() => {
         userInfo();
     })
@@ -38,6 +48,10 @@ import { useRoute, useRouter } from 'vue-router';
         }catch(error){
             console.log(error)
         }
+    }
+    const uploadFile = (event) => {
+        const file = event.target.files[0];
+        image.value = URL.createObjectURL(file);    
     }
     const editSubmitForm = async () => {
         try{
