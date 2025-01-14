@@ -1,8 +1,9 @@
 <template>
-    <h1>Layout</h1>
-<Header />
-<RouterView />
-<Footer />
+<div class="p-4">
+    <Header />
+    <RouterView />
+    <Footer />
+</div>
 </template>
 
 <script setup>
