@@ -5,6 +5,9 @@
         <input type="text" v-model="newUser.email" class="border">
         <input type="text" v-model="newUser.password" class="border">
         <input type="file" @change="uploadFile">
+       <div class="mt-5 mb-5" v-if="image">
+            <img :src="image" alt="" class="w-20 h-20">
+       </div>
         <button type="submit" class="bg-blue-500 p-4">Submit</button>
     </form>
 
@@ -21,12 +24,13 @@ const newUser = ref({
     avatar: null,
     password: '',
 })
-
+const image = ref(null);
 const router = useRouter();
 
     const uploadFile = (event) => {
         const file = event.target.files[0];
-        newUser.value.avatar = file;        
+        image.value = URL.createObjectURL(file)      
+        newUser.value.avatar = file;   
     }
     const submitForm = async () => {
         try {
