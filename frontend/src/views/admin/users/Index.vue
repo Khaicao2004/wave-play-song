@@ -17,13 +17,14 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="user in users">
+            <tr v-for="user in users" :key="user.id">
             <td class="border">{{ user.id }}</td>
             <td class="border">{{ user.name }}</td>
             <td class="border">{{ user.email }}</td>
             <td class="border">{{ user.type }}</td>
-            <td>
-                <RouterLink :to="{ name: 'users-show', params: { id: user.id} }" class="bg-blue-200 ">Show</RouterLink>
+            <td class="border">
+                <RouterLink :to="{ name: 'users-show', params: { id: user.id} }" class="bg-blue-500 p-4 w-auto h-auto">Show</RouterLink>
+                <button type="button" class="bg-red-500 p-4 w-auto h-auto" @click="deleteUser(user.id)">Delete</button>
             </td>
         </tr>
     </tbody>
@@ -40,15 +41,27 @@ import { onMounted, ref } from 'vue';
 
     const users = ref([]);
 
-    onMounted( async () => {
+    onMounted(() => {
+        listUsers();    
+    })
+
+    const listUsers = async () => {
         try {
             let response = await axios.get('http://127.0.0.1:8000/api/users');
             users.value = response.data;
         } catch (error) {
             console.log(error);
         }
+    }
+    const deleteUser = async (id) => {
+      try {
+        await axios.delete('http://127.0.0.1:8000/api/users/' + id);
+        users.value = users.value.filter(user => user.id != id);
+      } catch (error) {
+        console.log(error);
         
-    })
+      }
+    }
 </script>
 
 <style scoped></style>
