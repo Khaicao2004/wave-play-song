@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <aside class="bg-gray-800 text-white w-64 md:w-72 lg:w-80 flex-shrink-0 flex flex-col">
+          <!-- Logo -->
+          <div class="flex items-center justify-between p-4 bg-gray-900">
+            <h1 class="text-lg font-semibold">My Sidebar</h1>
+            <!-- Hamburger menu (for small screens) -->
+            <button class="md:hidden p-2 rounded hover:bg-gray-700 focus:outline-none">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+              </svg>
+            </button>
+          </div>
+      
+          <!-- Navigation links -->
+          <nav class="flex-1 p-4 space-y-2">
+            <a href="#" class="block px-4 py-2 rounded hover:bg-gray-700">Dashboard</a>
+            <a href="#" class="block px-4 py-2 rounded hover:bg-gray-700">Users</a>
+            <a href="#" class="block px-4 py-2 rounded hover:bg-gray-700">Settings</a>
+            <a href="#" class="block px-4 py-2 rounded hover:bg-gray-700">Reports</a>
+          </nav>
+      
+          <!-- Footer -->
+          <div class="p-4 bg-gray-900">
+            <p class="text-sm">© 2025 My Sidebar</p>
+          </div>
+        </aside>
+      
+        <!-- Main Content -->
+        <main class="flex-1 bg-gray-100 p-6">
+          <h2 class="text-2xl font-bold mb-4">Main Content Area</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse potenti.</p>
+        </main>
+      </div>
+      
+</body>
+</html>

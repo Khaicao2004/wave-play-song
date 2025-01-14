@@ -24,6 +24,7 @@
             <td class="border">{{ user.type }}</td>
             <td class="border">
                 <RouterLink :to="{ name: 'users-show', params: { id: user.id} }" class="bg-blue-500 p-4 w-auto h-auto">Show</RouterLink>
+                <RouterLink :to="{ name: 'users-edit', params: { id: user.id} }" class="bg-yellow-500 p-4 w-auto h-auto">Edit</RouterLink>
                 <button type="button" class="bg-red-500 p-4 w-auto h-auto" @click="deleteUser(user.id)">Delete</button>
             </td>
         </tr>

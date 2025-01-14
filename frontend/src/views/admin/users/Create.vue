@@ -1,6 +1,5 @@
 <template>
     <h1 class="text-center text-3xl">hello</h1>
-    <p>Data: {{ newUser }}</p>
     <form @submit.prevent="submitForm()">
         <input type="text" v-model="newUser.name" class="border">
         <input type="text" v-model="newUser.email" class="border">
@@ -13,12 +12,15 @@
 <script setup>
 import axios from 'axios';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 const newUser = ref({
     name: '',
     email: '',
     password: '',
 })
+
+const router = useRouter();
 // console.log(newUser.name);
     const submitForm = async () => {
         try {
@@ -26,6 +28,7 @@ const newUser = ref({
             newUser.value.name = '';
             newUser.value.email = '';
             newUser.value.password = '';
+            router.push({name: 'users-index'});
         } catch (error) {
             console.log(error);
             
