@@ -13,6 +13,7 @@
                 <th class="border">Name</th>
                 <th class="border">Email</th>
                 <th class="border">Type</th>
+                <th class="border">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -21,6 +22,9 @@
             <td class="border">{{ user.name }}</td>
             <td class="border">{{ user.email }}</td>
             <td class="border">{{ user.type }}</td>
+            <td>
+                <RouterLink :to="{ name: 'users-show', params: { id: user.id} }" class="bg-blue-200 ">Show</RouterLink>
+            </td>
         </tr>
     </tbody>
     </table>
