@@ -12,6 +12,7 @@
                 <th class="border">ID</th>
                 <th class="border">Name</th>
                 <th class="border">Email</th>
+                <th class="border">Avatar</th>
                 <th class="border">Type</th>
                 <th class="border">Action</th>
             </tr>
@@ -21,6 +22,7 @@
             <td class="border">{{ user.id }}</td>
             <td class="border">{{ user.name }}</td>
             <td class="border">{{ user.email }}</td>
+            <td class="border"><img :src="`http://127.0.0.1:8000/storage/${user.avatar}`" alt="User Avatar" class="w-10 h-10"></td>
             <td class="border">{{ user.type }}</td>
             <td class="border">
                 <RouterLink :to="{ name: 'users-show', params: { id: user.id} }" class="bg-blue-500 p-4 w-auto h-auto">Show</RouterLink>
