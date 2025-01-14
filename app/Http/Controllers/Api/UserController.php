@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -22,7 +23,11 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-       $user =  User::query()->create($request->all());
+        $data = $request->except('avatar');
+        if($request->has('avatar')){
+            $data['avatar'] = Storage::put('uploads', $request->file('avatar'));
+        }
+       $user =  User::query()->create($data);
        return response()->json($user);
     }
 
