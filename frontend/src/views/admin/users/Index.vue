@@ -25,9 +25,11 @@
             <td class="border"><img :src="`http://127.0.0.1:8000/storage/${user.avatar}`" alt="User Avatar" class="w-10 h-10"></td>
             <td class="border">{{ user.type }}</td>
             <td class="border">
-                <RouterLink :to="{ name: 'users-show', params: { id: user.id} }" class="bg-blue-500 p-4 w-auto h-auto">Show</RouterLink>
-                <RouterLink :to="{ name: 'users-edit', params: { id: user.id} }" class="bg-yellow-500 p-4 w-auto h-auto">Edit</RouterLink>
-                <button type="button" class="bg-red-500 p-4 w-auto h-auto" @click="deleteUser(user.id)">Delete</button>
+               <div class="flex justify-center gap-2 p-2">
+                    <RouterLink :to="{ name: 'users-show', params: { id: user.id} }" class="bg-blue-500 p-4 w-auto h-auto">Show</RouterLink>
+                    <RouterLink :to="{ name: 'users-edit', params: { id: user.id} }" class="bg-yellow-500 p-4 w-auto h-auto">Edit</RouterLink>
+                    <button type="button" class="bg-red-500 p-4 w-auto h-auto" @click="deleteUser(user.id)">Delete</button>
+               </div>
             </td>
         </tr>
     </tbody>
@@ -43,7 +45,6 @@ import axios from 'axios';
 import { onMounted, ref } from 'vue';
 
     const users = ref([]);
-
     onMounted(() => {
         listUsers();    
     })
