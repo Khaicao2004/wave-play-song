@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('genres', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->unique();  // Tên thể loại
+            $table->string('cover_image')->nullable(); // Ảnh bìa thể loại
+            $table->text('description')->nullable(); // Mô tả
             $table->timestamps();
         });
     }

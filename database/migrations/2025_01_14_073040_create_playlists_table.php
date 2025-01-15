@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,6 +14,9 @@ return new class extends Migration
     {
         Schema::create('playlists', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(User::class)->constrained();  // Người dùng ( Danh sách phát của cá nhân )
+            $table->string('name'); // Tên danh sách phát
+            $table->text('description')->nullable(); // Mô tả
             $table->timestamps();
         });
     }

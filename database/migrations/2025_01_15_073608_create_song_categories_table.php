@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Category;
+use App\Models\Song;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,8 +13,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('avatar')->after('email')->nullable();  // Hình ảnh người dùng nếu có
+        Schema::create('song_categories', function (Blueprint $table) {
+           $table->foreignIdFor(Song::class)->constrained();
+           $table->foreignIdFor(Category::class)->constrained();
+
+           $table->primary(['song_id', 'category_id']);
         });
     }
 
@@ -21,8 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('avatar');
-        });
+        Schema::dropIfExists('song_categories');
     }
 };

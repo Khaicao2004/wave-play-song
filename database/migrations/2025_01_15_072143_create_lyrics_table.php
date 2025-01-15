@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Song;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,11 +12,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('artists', function (Blueprint $table) {
+        Schema::create('lyrics', function (Blueprint $table) {
             $table->id();
-            $table->string('name');  // Tên nghệ sĩ
-            $table->string('cover_image')->nullable(); // Ảnh nghệ sĩ
-            $table->text('bio')->nullable(); // Thông tin về nghệ sĩ
+            $table->foreignIdFor(Song::class)->constrained();  // Bài hát
+            $table->string('language', 5); // Ngôn ngữ bài hát
+            $table->text('lyrics'); // Lời bài hát
+            $table->unique('song_id', 'language');
             $table->timestamps();
         });
     }
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('artists');
+        Schema::dropIfExists('lyrics');
     }
 };
