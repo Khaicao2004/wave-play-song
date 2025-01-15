@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->unique();  // Tên danh mục
+            $table->string('cover_image')->nullable(); // Ảnh bìa danh mục
+            $table->text('description')->nullable(); // Mô tả
             $table->timestamps();
         });
     }
