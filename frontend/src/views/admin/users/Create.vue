@@ -5,7 +5,7 @@
         <input type="text" v-model="newUser.email" class="border">
         <input type="text" v-model="newUser.password" class="border">
         <input type="file" @change="uploadFile">
-       <div class="mt-5 mb-5" v-if="image">
+       <div class="mt-5" v-if="image">
             <img :src="image" alt="" class="w-20 h-20">
        </div>
         <button type="submit" class="bg-blue-500 p-4">Submit</button>
@@ -40,11 +40,7 @@ const router = useRouter();
             formData.append('avatar',newUser.value.avatar);
             formData.append('password',newUser.value.password);
             
-            await axios.post('http://127.0.0.1:8000/api/users', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            });
+            await axios.post('http://127.0.0.1:8000/api/users', formData);
             newUser.value.name = '';
             newUser.value.email = '';
             newUser.value.avatar = null;

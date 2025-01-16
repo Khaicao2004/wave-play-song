@@ -1,6 +1,6 @@
 <template>
     <h1 class="text-center text-3xl">Edit data user</h1>
-    <form @submit.prevent="editSubmitForm()">
+    <form @submit.prevent="editSubmitForm">
         <div class="p-4">
         <div class="mt-3">
             <label>Name: </label>
@@ -55,8 +55,14 @@ import { useRoute, useRouter } from 'vue-router';
     }
     const editSubmitForm = async () => {
         try{
-            await axios.put('http://127.0.0.1:8000/api/users/' + id, user.value)
-            router.push({name: 'users-index'});
+            const formData = new FormData();
+            formData.append('name', user.value.name);
+            formData.append('email', user.value.email);
+            formData.append('avatar', user.value.avatar);
+            formData.append('type', user.value.type);
+
+            await axios.post('http://127.0.0.1:8000/api/users/' + id, formData)
+            // router.push({name: 'users-index'});
         }catch(error){
             console.log(error);
         }
