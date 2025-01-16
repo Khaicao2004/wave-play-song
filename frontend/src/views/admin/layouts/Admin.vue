@@ -2,7 +2,7 @@
 <div class="flex h-screen bg-blue-100">
       <Sidebar/>
       <Content>
-        <h1 class="text-center">helloo</h1>
+         <RouterView />
       </Content>
     
    </div>
