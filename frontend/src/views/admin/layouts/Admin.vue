@@ -1,15 +1,17 @@
 <template>
-<div class="p-4">
-    <Header />
-    <RouterView />
-    <Footer />
-</div>
+<div class="flex h-screen bg-blue-100">
+      <Sidebar/>
+      <Content>
+         <RouterView />
+      </Content>
+    
+   </div>
 </template>
 
 <script setup>
     import { RouterView } from 'vue-router'
-    import Header from '@/components/admin/Header.vue';
-    import Footer from '@/components/admin/Footer.vue';
+    import Sidebar from '@/components/admin/Sidebar.vue';
+    import Content from '@/components/admin/Content.vue';
 
 </script>
 
