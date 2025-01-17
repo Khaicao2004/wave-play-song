@@ -34,6 +34,11 @@ const router = createRouter({
         name: 'users-edit',
         component: () => import('@/views/admin/users/Edit.vue')
       },
+      { 
+        path: 'categories',
+        name: 'categories-index',
+        component: () => import('@/views/admin/categories/Index.vue')
+      },
       ]
     }
   ],

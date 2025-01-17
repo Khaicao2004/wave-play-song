@@ -4,9 +4,9 @@
     
    <div class="p-4">
     <div class="mb-5">
-        <RouterLink :to="{name: 'users-create'}" class="p-4 bg-blue-400">Create</RouterLink>
+        <RouterLink :to="{name: 'users-create'}" class="p-4 bg-blue-200">Create</RouterLink>
     </div>
-    <table class="border  w-full text-center">
+    <table class="border-spacing-2  w-full text-center">
         <thead>
             <tr>
                 <th class="border">ID</th>
