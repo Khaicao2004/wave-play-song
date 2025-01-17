@@ -6,7 +6,7 @@
     <div class="mb-5">
         <RouterLink :to="{name: 'users-create'}" class="p-4 bg-blue-200">Create</RouterLink>
     </div>
-    <table class="border-spacing-2  w-full text-center">
+    <table class="border-x-neutral-950 border-spacing-2  w-full text-center overflow-auto">
         <thead>
             <tr>
                 <th class="border">ID</th>
@@ -26,9 +26,9 @@
             <td class="border">{{ user.type }}</td>
             <td class="border">
                <div class="flex justify-center gap-2 p-2">
-                    <RouterLink :to="{ name: 'users-show', params: { id: user.id} }" class="bg-blue-500 p-4 w-auto h-auto">Show</RouterLink>
-                    <RouterLink :to="{ name: 'users-edit', params: { id: user.id} }" class="bg-yellow-500 p-4 w-auto h-auto">Edit</RouterLink>
-                    <button type="button" class="bg-red-500 p-4 w-auto h-auto" @click="deleteUser(user.id)">Delete</button>
+                    <RouterLink :to="{ name: 'users-show', params: { id: user.id} }" class="bg-blue-500 p-4 w-20 h-auto rounded">Show</RouterLink>
+                    <RouterLink :to="{ name: 'users-edit', params: { id: user.id} }" class="bg-yellow-500 p-4 w-20 h-auto rounded">Edit</RouterLink>
+                    <button type="button" class="bg-red-500 p-4 w-20 h-auto rounded" @click="deleteUser(user.id)">Delete</button>
                </div>
             </td>
         </tr>

@@ -1,5 +1,5 @@
 <template>
-<div class="flex h-screen bg-gray-100">
+<div class="flex h-screen bg-white">
       <Sidebar/>
       <Content>
          <RouterView />
