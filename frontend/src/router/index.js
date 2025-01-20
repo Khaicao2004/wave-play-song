@@ -9,7 +9,8 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: Home,
-    },{
+    },
+    {
       path: '/admin',
       name: 'layouts',
       component: () => import('@/views/admin/layouts/Admin.vue'),
@@ -39,8 +40,28 @@ const router = createRouter({
         name: 'categories-index',
         component: () => import('@/views/admin/categories/Index.vue')
       },
+      { 
+        path: 'categories/create',
+        name: 'categories-create',
+        component: () => import('@/views/admin/categories/Create.vue')
+      },
+      { 
+        path: 'categories/:id',
+        name: 'categories-show',
+        component: () => import('@/views/admin/categories/Show.vue')
+      },
+      { 
+        path: 'categories/:id/edit',
+        name: 'categories-edit',
+        component: () => import('@/views/admin/categories/Edit.vue')
+      },
       ]
-    }
+    },
+    {
+      path: '/auth/login',
+      name: 'auth-login',
+      component: () => import('@/views/auth/Login.vue'),
+    },
   ],
 })
 
