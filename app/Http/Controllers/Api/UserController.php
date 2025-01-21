@@ -24,8 +24,8 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $data = $request->except('avatar');
-        if($request->has('avatar')){
-            $data['avatar'] = Storage::put('uploads', $request->file('avatar'));
+        if($request->hasFile('avatar')){
+            $data['avatar'] = Storage::put('uploads/users', $request->file('avatar'));
         }
        $user =  User::query()->create($data);
        return response()->json($user);
@@ -57,6 +57,9 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $user->delete();
+        if($user->avatar){
+            Storage::delete($user->avatar);
+        }
         return response()->json(204);
     }
 }
