@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignIdFor(Song::class)->constrained();  // Bài hát
             $table->string('language', 5); // Ngôn ngữ bài hát
             $table->text('lyrics'); // Lời bài hát
-            $table->unique('song_id', 'language');
+            $table->unique(['song_id', 'language']);
             $table->timestamps();
         });
     }
