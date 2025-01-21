@@ -1,5 +1,4 @@
-<template>
-    <RouterView />
+<template>  
     <h1 class="text-3xl font-bold text-center mt-5 mb-5">List users</h1>
     
    <div class="p-4">

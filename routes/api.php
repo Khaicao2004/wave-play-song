@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\LyricController;
+use App\Http\Controllers\Api\SongController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Http\Request;
@@ -26,5 +28,12 @@ Route::delete('categories/{id}', [CategoryController::class, 'destroy']);
 
 
 // auth
-
 Route::post('auth/login', [LoginController::class, 'login']);
+
+// Songs
+Route::get('songs', [SongController::class, 'index']);
+
+
+// Lyrics
+
+Route::get('lyrics', [LyricController::class, 'index']);

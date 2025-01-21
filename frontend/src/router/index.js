@@ -55,6 +55,31 @@ const router = createRouter({
         name: 'categories-edit',
         component: () => import('@/views/admin/categories/Edit.vue')
       },
+      {
+        path: 'songs',
+        name: 'songs-index',
+        component: () => import('@/views/admin/songs/Index.vue'),
+      },
+      {
+        path: 'songs',
+        name: 'songs-create',
+        component: () => import('@/views/admin/songs/Create.vue'),
+      },
+      {
+        path: 'songs/:id',
+        name: 'songs-show',
+        component: () => import('@/views/admin/songs/Show.vue'),
+      },
+      {
+        path: 'songs/:id/edit',
+        name: 'songs-edit',
+        component: () => import('@/views/admin/songs/Edit.vue'),
+      },
+      {
+        path: 'lyrics',
+        name: 'lyrics-index',
+        component: () => import('@/views/admin/lyrics/Index.vue'),
+      },
       ]
     },
     {
