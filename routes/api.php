@@ -37,3 +37,4 @@ Route::get('songs', [SongController::class, 'index']);
 // Lyrics
 
 Route::get('lyrics', [LyricController::class, 'index']);
+Route::post('lyrics', [LyricController::class, 'store']);

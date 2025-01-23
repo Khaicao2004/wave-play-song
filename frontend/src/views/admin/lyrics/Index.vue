@@ -1,7 +1,8 @@
 <template>
     <h1 class="text-center text-3xl mt-5">List lyrics</h1>
     <div class="p-4">
-            <table class="w-full text-center">
+        <RouterLink :to="{ name: 'lyrics-create'}" class="p-2 bg-black text-white">Create</RouterLink>
+            <table class="w-full text-center mt-4">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -25,6 +26,7 @@
 <script setup>
 import axios from 'axios';
 import { onMounted, ref } from 'vue';
+import { RouterLink } from 'vue-router';
 
     const lyrics = ref([]);
     onMounted(() => {

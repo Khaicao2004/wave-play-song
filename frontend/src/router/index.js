@@ -80,12 +80,22 @@ const router = createRouter({
         name: 'lyrics-index',
         component: () => import('@/views/admin/lyrics/Index.vue'),
       },
+      {
+        path: 'lyrics/create',
+        name: 'lyrics-create',
+        component: () => import('@/views/admin/lyrics/Create.vue'),
+      },
       ]
     },
     {
       path: '/auth/login',
       name: 'auth-login',
       component: () => import('@/views/auth/Login.vue'),
+    },
+    {
+      path: '/songs/test',
+      name: 'songs-test',
+      component: () => import('@/views/SongTest.vue'),
     },
   ],
 })
