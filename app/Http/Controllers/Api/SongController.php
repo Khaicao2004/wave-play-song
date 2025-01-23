@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Song;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SongController extends Controller
 {
@@ -22,7 +23,15 @@ class SongController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->except(['cover_image', 'file']);
+        if($request->has('cover_image')){
+            $data['cover_image'] = Storage::put('uploads/songs/image', $request->file('cover_image'));
+        }
+        if($request->has('audio_file')){
+            $data['audio_file'] = Storage::put('uploads/songs/audio', $request->file('audio_file'));
+        }
+        Song::query()->create($data);
+        return response()->json($data);
     }
 
     /**

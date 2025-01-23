@@ -32,6 +32,7 @@ Route::post('auth/login', [LoginController::class, 'login']);
 
 // Songs
 Route::get('songs', [SongController::class, 'index']);
+Route::post('songs', [SongController::class, 'store']);
 
 
 // Lyrics

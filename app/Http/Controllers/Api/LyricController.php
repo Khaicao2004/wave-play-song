@@ -22,7 +22,8 @@ class LyricController extends Controller
      */
     public function store(Request $request)
     {
-        return response()->json($request->all());
+        $data = Lyric::query()->create($request->all());
+        return response()->json($data);
     }
 
     /**

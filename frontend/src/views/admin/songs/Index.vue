@@ -2,7 +2,7 @@
     <h1 class="text-3xl text-center mt-5 font-semibold">List songs</h1>
     <div class="p-4">
     <div class="mb-5">
-        <!-- <RouterLink :to="{name: 'songs-create'}" class="p-4 bg-blue-200">Create</RouterLink> -->
+        <RouterLink :to="{name: 'songs-create'}" class="p-4 bg-blue-200">Create</RouterLink>
     </div>
     <table class="border-x-neutral-950 border-spacing-2  w-full text-center overflow-auto">
         <thead>
