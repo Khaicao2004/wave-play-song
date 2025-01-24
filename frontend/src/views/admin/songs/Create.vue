@@ -48,6 +48,23 @@ import { ref } from 'vue';
         songs.value.audio_file = event.target.files[0];   
     }
     const submitForm = async () => {
-        await axios.post('http://127.0.0.1:8000/api/songs', songs.value);
+        try {
+            const formData = new FormData();
+            formData.append('name', songs.value.name);
+            formData.append('cover_image', songs.value.cover_image);
+            formData.append('audio_file', songs.value.audio_file);
+            formData.append('duration', songs.value.duration);
+            formData.append('release_date', songs.value.release_date);
+            
+            
+            await axios.post('http://127.0.0.1:8000/api/songs', formData);
+            songs.value.name = '';
+            songs.value.cover_image = '';
+            songs.value.audio_file = '';
+            songs.value.duration = '';
+            songs.value.release_date = '';
+        } catch (error) {
+            console.log(error);
+        }
     }
 </script>

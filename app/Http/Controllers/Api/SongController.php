@@ -24,10 +24,10 @@ class SongController extends Controller
     public function store(Request $request)
     {
         $data = $request->except(['cover_image', 'file']);
-        if($request->has('cover_image')){
+        if($request->hasFile('cover_image')){
             $data['cover_image'] = Storage::put('uploads/songs/image', $request->file('cover_image'));
         }
-        if($request->has('audio_file')){
+        if($request->hasFile('audio_file')){
             $data['audio_file'] = Storage::put('uploads/songs/audio', $request->file('audio_file'));
         }
         Song::query()->create($data);
@@ -39,7 +39,8 @@ class SongController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $song = Song::findOrFail($id);
+        return response()->json($song);
     }
 
     /**

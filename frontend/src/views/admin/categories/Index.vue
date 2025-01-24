@@ -20,7 +20,7 @@
             <td class="border">{{ category.name }}</td>
             
             <td class="border">
-                <img :src="`http://127.0.0.1:8000/storage/${category.cover_image}`" alt="category Avatar" class="w-10 h-10" v-if="category.cover_image">
+                <img :src="`${STORAGE_URL}${category.cover_image}`" alt="category Avatar" class="w-10 h-10" v-if="category.cover_image">
                 <span v-else>No Image</span>
             </td>
             <td class="border">{{ category.description }}</td>
@@ -38,7 +38,9 @@
 </template>
 
 <script setup>
+import STORAGE_URL from '@/utils/configStorageUrl';
 import axios from 'axios';
+
 import { onMounted, ref  } from 'vue';
 
 

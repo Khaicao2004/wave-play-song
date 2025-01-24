@@ -18,7 +18,7 @@ Route::get('users', [UserController::class, 'index']);
 Route::post('users', [UserController::class, 'store']);
 Route::get('users/{id}', [UserController::class, 'show']);
 Route::delete('users/{id}', [UserController::class, 'destroy']);
-Route::post('users/{id}', [UserController::class, 'update']);
+Route::put('users/{id}', [UserController::class, 'update']);
 
 
 // Categories
@@ -33,6 +33,7 @@ Route::post('auth/login', [LoginController::class, 'login']);
 // Songs
 Route::get('songs', [SongController::class, 'index']);
 Route::post('songs', [SongController::class, 'store']);
+Route::get('songs/{id}', [SongController::class, 'show']);
 
 
 // Lyrics
