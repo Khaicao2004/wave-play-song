@@ -85,6 +85,21 @@ const router = createRouter({
         name: 'lyrics-create',
         component: () => import('@/views/admin/lyrics/Create.vue'),
       },
+      {
+        path: 'lyrics/:id/edit',
+        name: 'lyrics-edit',
+        component: () => import('@/views/admin/lyrics/Edit.vue'),
+      },
+      {
+        path: 'artists',
+        name: 'artists-index',
+        component: () => import('@/views/admin/artists/Index.vue'),
+      },
+      {
+        path: 'artists/create',
+        name: 'artists-create',
+        component: () => import('@/views/admin/artists/Create.vue'),
+      },
       ]
     },
     {

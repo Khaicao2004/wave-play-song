@@ -19,6 +19,12 @@
                 <input type="time" v-model="songs.duration">
             </div>
             <div class="mt-3">
+                <label>Artists: </label>
+                <select v-model="artist_id">
+                    <option v-for="artist in artists" :value="artist.id">{{ artist.name }}</option>
+                </select>
+            </div>
+            <div class="mt-3">
                 <label>Release date:</label>
                 <input type="date" v-model="songs.release_date">
             </div>
@@ -31,7 +37,7 @@
 
 <script setup>
 import axios from 'axios';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 
     const songs = ref({
         name: '',
@@ -40,6 +46,8 @@ import { ref } from 'vue';
         duration: '',
         release_date: '',
     })
+    const artist_id = ref('');
+    const artists = ref([]);
     const uploadImage = (event) => {
         songs.value.cover_image = event.target.files[0];
         
@@ -47,6 +55,13 @@ import { ref } from 'vue';
     const uploadAudio = (event) => {
         songs.value.audio_file = event.target.files[0];   
     }
+    const fetchArtists = async() => {
+        let response = await axios.get('http://127.0.0.1:8000/api/artists');
+        artists.value = response.data;
+    }
+    onMounted(() => {
+        fetchArtists();
+    })
     const submitForm = async () => {
         try {
             const formData = new FormData();
@@ -55,6 +70,7 @@ import { ref } from 'vue';
             formData.append('audio_file', songs.value.audio_file);
             formData.append('duration', songs.value.duration);
             formData.append('release_date', songs.value.release_date);
+            formData.append('artist_id', artist_id.value);
             
             
             await axios.post('http://127.0.0.1:8000/api/songs', formData);
@@ -63,6 +79,7 @@ import { ref } from 'vue';
             songs.value.audio_file = '';
             songs.value.duration = '';
             songs.value.release_date = '';
+            artist_id.value = '';
         } catch (error) {
             console.log(error);
         }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ArtistController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\LyricController;
 use App\Http\Controllers\Api\SongController;
@@ -34,9 +35,17 @@ Route::post('auth/login', [LoginController::class, 'login']);
 Route::get('songs', [SongController::class, 'index']);
 Route::post('songs', [SongController::class, 'store']);
 Route::get('songs/{id}', [SongController::class, 'show']);
+Route::put('songs/{id}', [SongController::class, 'update']);
 
 
 // Lyrics
 
 Route::get('lyrics', [LyricController::class, 'index']);
 Route::post('lyrics', [LyricController::class, 'store']);
+Route::get('lyrics/{id}', [LyricController::class, 'show']);
+Route::put('lyrics/{id}', [LyricController::class, 'update']);
+
+// Artists
+
+Route::get('artists', [ArtistController::class, 'index']);
+Route::post('artists', [ArtistController::class, 'store']);

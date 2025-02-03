@@ -68,19 +68,15 @@ import { useRoute } from 'vue-router';
     const submitForm = async () => {
         try {
             const formData = new FormData();
+            formData.append('_method', 'PUT');
             formData.append('name', song.value.name);
             formData.append('cover_image', song.value.cover_image);
             formData.append('audio_file', song.value.audio_file);
             formData.append('duration', song.value.duration);
             formData.append('release_date', song.value.release_date);
             
-            
-            await axios.post('http://127.0.0.1:8000/api/songs', formData);
-            song.value.name = '';
-            song.value.cover_image = '';
-            song.value.audio_file = '';
-            song.value.duration = '';
-            song.value.release_date = '';
+            await axios.post('http://127.0.0.1:8000/api/songs/' + id, formData);
+            fetchSong();
         } catch (error) {
             console.log(error);
         }
