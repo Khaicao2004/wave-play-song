@@ -2,7 +2,7 @@
     <h1 class="text-3xl text-center mt-5 font-semibold">List songs</h1>
     <div class="p-4">
     <div class="mb-5">
-        <!-- <RouterLink :to="{name: 'songs-create'}" class="p-4 bg-blue-200">Create</RouterLink> -->
+        <RouterLink :to="{name: 'songs-create'}" class="p-4 bg-blue-200">Create</RouterLink>
     </div>
     <table class="border-x-neutral-950 border-spacing-2  w-full text-center overflow-auto">
         <thead>
@@ -10,6 +10,7 @@
                 <th class="border">ID</th>
                 <th class="border">Name</th>
                 <th class="border">Cover image</th>
+                <th class="border">Audio</th>
                 <th class="border">Duration</th>
                 <th class="border">Release date</th>
                 <th class="border">Action</th>
@@ -21,8 +22,17 @@
             <td class="border">{{ song.name }}</td>
             
             <td class="border">
-                <img :src="`http://127.0.0.1:8000/storage/${song.cover_image}`" alt="song Avatar" class="w-10 h-10" v-if="song.cover_image">
-                <span v-else>No Image</span>
+                <div class="flex justify-center items-center">
+                    <img :src="`${STORAGE_URL}${song.cover_image}`" alt="song Avatar" class="w-10 h-10" v-if="song.cover_image">
+                    <span v-else>No Image</span>
+                </div>
+            </td>
+            <td>
+               <div class="px-2">
+                    <audio preload="auto" controls>
+                        <source :src="`${STORAGE_URL}${song.audio_file}`">
+                    </audio>
+               </div>
             </td>
             <td class="border">{{ song.duration }}</td>
             <td class="border">{{ song.release_date }}</td>
@@ -40,6 +50,7 @@
 </template>
 
 <script setup>
+import STORAGE_URL from '@/utils/configStorageUrl';
 import axios from 'axios';
 import { onMounted, ref  } from 'vue';
 

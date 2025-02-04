@@ -21,7 +21,11 @@
             <td class="border">{{ user.id }}</td>
             <td class="border">{{ user.name }}</td>
             <td class="border">{{ user.email }}</td>
-            <td class="border"><img :src="`http://127.0.0.1:8000/storage/${user.avatar}`" alt="User Avatar" class="w-10 h-10"></td>
+            <td class="border">
+                <div class="flex justify-center">
+                    <img :src="`${STORAGE_URL}${user.avatar}`" alt="User Avatar" class="w-10 h-10">
+                </div>
+            </td>
             <td class="border">{{ user.type }}</td>
             <td class="border">
                <div class="flex justify-center gap-2 p-2">
@@ -40,6 +44,8 @@
 
 <script setup>
 import { RouterLink } from 'vue-router';
+import STORAGE_URL from '@/utils/configStorageUrl';
+
 import axios from 'axios';
 import { onMounted, ref } from 'vue';
 

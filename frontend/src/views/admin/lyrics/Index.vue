@@ -1,21 +1,28 @@
 <template>
     <h1 class="text-center text-3xl mt-5">List lyrics</h1>
     <div class="p-4">
-            <table class="w-full text-center">
+        <RouterLink :to="{ name: 'lyrics-create'}" class="p-2 bg-black text-white">Create</RouterLink>
+            <table class="w-full text-center mt-4 border">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Song name</th>
-                        <th>Language</th>
-                        <th>Lyrics</th>
+                        <th class="border">ID</th>
+                        <th class="border">Song name</th>
+                        <th class="border">Language</th>
+                        <th class="border">Lyrics</th>
+                        <th class="border">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="lyric in lyrics" :key="lyric.id">
-                        <td>{{ lyric.id }}</td>
-                        <td>{{ lyric.song.name }}</td>
-                        <td>{{ lyric.language }}</td>
-                        <td>{{ lyric.lyrics }}</td>
+                        <td class="border">{{ lyric.id }}</td>
+                        <td class="border">{{ lyric.song.name }}</td>
+                        <td class="border">{{ lyric.language }}</td>
+                        <td class="border">{{ lyric.lyrics }}</td>
+                        <td class="border p-2">
+                            <div class="flex justify-center">
+                                <RouterLink :to="{ name: 'lyrics-edit', params: { id: lyric.id } }" class="p-2 bg-blue-500 rounded">Edit</RouterLink>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -25,6 +32,7 @@
 <script setup>
 import axios from 'axios';
 import { onMounted, ref } from 'vue';
+import { RouterLink } from 'vue-router';
 
     const lyrics = ref([]);
     onMounted(() => {

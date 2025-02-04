@@ -15,6 +15,9 @@
                 <li class="bg-black px-4 py-2 hover:bg-gray-500 rounded">
                     <RouterLink :to="{name: 'lyrics-index'}" class="px-4">Lyrics</RouterLink>
                 </li>
+                <li class="bg-black px-4 py-2 hover:bg-gray-500 rounded">
+                    <RouterLink :to="{name: 'artists-index'}" class="px-4">Artists</RouterLink>
+                </li>
            </ul>
         </nav>
        </aside>

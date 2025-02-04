@@ -45,9 +45,22 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        
+       try {
         $user = User::findOrFail($id);
-        $user->update($request->all());
+        $oldAvatar = $user->avatar;
+        $data = $request->except('avatar');
+        if($request->hasFile('avatar')){
+            $data['avatar'] = Storage::put('uploads/users', $request->file('avatar'));
+        }
+        $user->update($data);
+        if($request->hasFile('avatar') && $oldAvatar){
+            Storage::delete($oldAvatar);
+        }
        return response()->json($user);
+       } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()]);
+       }
     }
 
     /**

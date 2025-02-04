@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Song;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SongController extends Controller
 {
@@ -22,7 +23,18 @@ class SongController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->except(['cover_image', 'file']);
+        if($request->hasFile('cover_image')){
+            $data['cover_image'] = Storage::put('uploads/songs/image', $request->file('cover_image'));
+        }
+        if($request->hasFile('audio_file')){
+            $data['audio_file'] = Storage::put('uploads/songs/audio', $request->file('audio_file'));
+        }
+       $song =  Song::query()->create($data);
+        if($request->artist_id){
+           $song->artists()->sync($request->artist_id);
+        }
+        return response()->json($song);
     }
 
     /**
@@ -30,7 +42,8 @@ class SongController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $song = Song::findOrFail($id);
+        return response()->json($song);
     }
 
     /**
@@ -38,7 +51,17 @@ class SongController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $song = Song::findOrFail($id);
+        $data = $request->except(['cover_image', 'file']);
+        if($request->hasFile('cover_image')){
+            $data['cover_image'] = Storage::put('uploads/songs/image', $request->file('cover_image'));
+        }
+        if($request->hasFile('audio_file')){
+            $data['audio_file'] = Storage::put('uploads/songs/audio', $request->file('audio_file'));
+        }
+        $song->update($data);
+        return response()->json($song);
+
     }
 
     /**

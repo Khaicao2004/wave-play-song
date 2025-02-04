@@ -3,17 +3,18 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Lyric;
+use App\Models\Artist;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
-class LyricController extends Controller
+class ArtistController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-       $data = Lyric::with('song')->get();
+       $data = Artist::all();
        return response()->json($data);
     }
 
@@ -22,8 +23,12 @@ class LyricController extends Controller
      */
     public function store(Request $request)
     {
-        $data = Lyric::query()->create($request->all());
-        return response()->json($data);
+       $data = $request->except('cover_image');
+       if($request->hasFile('cover_image')){
+            $data['cover_image'] = Storage::put('uploads/artists', $request->file('cover_image'));
+       }
+       $artist = Artist::query()->create($data);
+       return response()->json($artist);
     }
 
     /**
@@ -31,8 +36,7 @@ class LyricController extends Controller
      */
     public function show(string $id)
     {
-        $lyric = Lyric::findOrFail($id);
-        return response()->json($lyric);
+        //
     }
 
     /**
@@ -40,9 +44,7 @@ class LyricController extends Controller
      */
     public function update(Request $request, string $id)
     {
-       $lyric = Lyric::findOrFail($id);
-       $lyric->update($request->all());
-       return response()->json($lyric);
+        //
     }
 
     /**

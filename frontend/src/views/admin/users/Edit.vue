@@ -19,10 +19,7 @@
             <input type="file" @change="uploadFile">
         </div>
         <div class="mt-3 mb-3">
-            <img :src="`http://127.0.0.1:8000/storage/${user.avatar}`" alt="" class="w-20 h-20">
-        </div>
-        <div class="mt-3 mb-3">
-            <img :src="image" alt="" class="w-20 h-20">
+            <img :src="previewImage || `http://127.0.0.1:8000/storage/${user.avatar}`" alt="" class="w-20 h-20">
         </div>
         <button type="submit" class="bg-green-500 p-4">Submit</button>
     </div>
@@ -33,11 +30,16 @@
 import axios from 'axios';
 import { onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-    const user = ref([]);
+    const user = ref({
+        name: '',
+        email: '',
+        type: '',
+        avatar: '',
+    });
     const route = useRoute();
     const id = route.params.id;
     const router = useRouter();
-    const image = ref(null);
+    const previewImage = ref(null);
     onMounted(() => {
         userInfo();
     })
@@ -51,18 +53,28 @@ import { useRoute, useRouter } from 'vue-router';
     }
     const uploadFile = (event) => {
         const file = event.target.files[0];
-        image.value = URL.createObjectURL(file);    
+        // user.value.avatar = file;   
+        if (file) {
+        const reader = new FileReader();
+        console.log(reader)
+        reader.onloadend = () => {
+            previewImage.value = reader.result; // Gán ảnh preview vào previewImage
+        };
+        reader.readAsDataURL(file);
+        // Lưu avatar vào user để gửi kèm theo khi submit form (nếu cần)
+        user.value.avatar = file;
+    }
     }
     const editSubmitForm = async () => {
         try{
             const formData = new FormData();
+            formData.append('_method', 'PUT');
             formData.append('name', user.value.name);
             formData.append('email', user.value.email);
             formData.append('avatar', user.value.avatar);
             formData.append('type', user.value.type);
-
             await axios.post('http://127.0.0.1:8000/api/users/' + id, formData)
-            // router.push({name: 'users-index'});
+            router.push({name: 'users-index'});
         }catch(error){
             console.log(error);
         }
