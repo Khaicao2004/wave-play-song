@@ -30,8 +30,11 @@ class SongController extends Controller
         if($request->hasFile('audio_file')){
             $data['audio_file'] = Storage::put('uploads/songs/audio', $request->file('audio_file'));
         }
-        Song::query()->create($data);
-        return response()->json($data, $request->artist_id);
+       $song =  Song::query()->create($data);
+        if($request->artist_id){
+           $song->artists()->sync($request->artist_id);
+        }
+        return response()->json($song);
     }
 
     /**

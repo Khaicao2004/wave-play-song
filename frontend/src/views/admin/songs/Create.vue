@@ -20,7 +20,7 @@
             </div>
             <div class="mt-3">
                 <label>Artists: </label>
-                <select v-model="artist_id">
+                <select v-model="artist_id" multiple>
                     <option v-for="artist in artists" :value="artist.id">{{ artist.name }}</option>
                 </select>
             </div>
@@ -46,7 +46,7 @@ import { onMounted, ref } from 'vue';
         duration: '',
         release_date: '',
     })
-    const artist_id = ref('');
+    const artist_id = ref([]);
     const artists = ref([]);
     const uploadImage = (event) => {
         songs.value.cover_image = event.target.files[0];
@@ -70,7 +70,9 @@ import { onMounted, ref } from 'vue';
             formData.append('audio_file', songs.value.audio_file);
             formData.append('duration', songs.value.duration);
             formData.append('release_date', songs.value.release_date);
-            formData.append('artist_id', artist_id.value);
+            artist_id.value.forEach(id => {
+                formData.append('artist_id[]', id);
+            })
             
             
             await axios.post('http://127.0.0.1:8000/api/songs', formData);
@@ -79,7 +81,7 @@ import { onMounted, ref } from 'vue';
             songs.value.audio_file = '';
             songs.value.duration = '';
             songs.value.release_date = '';
-            artist_id.value = '';
+            artist_id.value = [];
         } catch (error) {
             console.log(error);
         }
