@@ -19,6 +19,13 @@
                     <source :src="`${STORAGE_URL}${song.audio_file}`">
                 </audio>
             </div>
+
+            <div class="mt-3">
+                <label>Artists: </label>
+                <select v-model="artist_id" multiple>
+                    <option v-for="artist in artists" :value="artist.id">{{ artist.name }}</option>
+                </select>
+            </div>
             <div class="mt-3">
                 <label>Duration:</label>
                 <input type="time" v-model="song.duration">
@@ -47,6 +54,8 @@ import { useRoute } from 'vue-router';
         duration: '',
         release_date: '',
     })
+    const artist_id = ref([]);
+    const artists = ref([]);
 
     const route = useRoute();
     const id = route.params.id;
@@ -60,10 +69,16 @@ import { useRoute } from 'vue-router';
     }
     onMounted(() => {
         fetchSong();
+        fetchArtists();
     })
+    const fetchArtists = async() => {
+        let response = await axios.get('http://127.0.0.1:8000/api/artists');
+        artists.value = response.data;
+    }
     const fetchSong = async () => {
         let response  = await axios.get('http://127.0.0.1:8000/api/songs/' + id);
         song.value = response.data;
+        artist_id.value = response.data.artist_id;
     }
     const submitForm = async () => {
         try {
